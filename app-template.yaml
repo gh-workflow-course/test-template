@@ -68,9 +68,18 @@ spec:
       name: Buy more Guitars!
       action: github:actions:dispatch
       input:
-        workflowId:  ${{ parameters.workflow_id }}
-        owner:  ${{ parameters.owner }}
-        repoUrl: '${{ parameters.repoUrl | parseRepoUrl }}'
+        workflowId:  'provision.yml'
+        owner:  'mutual-of-omaha'
+        repoUrl: 'github.com?repo=repository-bootstrap&owner=mutual-of-omaha'
+        repo-name: 'test-scaffolder-dispatch1'
+        repo-desc: 'testing scaffolder dispatch with bootstrap'
+        support-group-email: 'rob.temple@mutualofomaha.com' 
+        organization: 'mutual-of-omaha'
+        private: false
+        team-id: 'CTPSP'
+        template: none
+        delete-repo: false
+        vault-override: false
         branchOrTagName: 'main'
                 
 #    - id: create-proton-service
