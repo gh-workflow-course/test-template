@@ -61,6 +61,7 @@ spec:
     #     repo-desc: ${{ parameters.repo_desc }}
     #     repoUrl: 'github.com?repo=repository-bootstrap&owner=mutual-of-omaha'
     #     #repoUrl: 'api.github.com/repos/mutual-of-omaha/repository-bootstrap/actions/provision.yml'
+    #     #repoUrl: 'github.com?repo=course-code&owner=penguins0141'
     #     branchOrTagName: 'main'
         
     - id: github-action
@@ -69,7 +70,7 @@ spec:
       input:
         workflowId:  ${{ parameters.workflow_id }}
         owner:  ${{ parameters.owner }}
-        repoUrl: 'github.com?repo=course-code&owner=penguins0141'
+        repoUrl: 'github.com?repo=course-code'
         branchOrTagName: 'main'
                 
 #    - id: create-proton-service
