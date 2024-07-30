@@ -98,7 +98,7 @@ spec:
       input:
         workflowId:  ${{ parameters.workflow_id2 }}
         owner:  ${{ parameters.owner }}
-        repoUrl: 'api.github.com?repo=course-code&owner=penguins0141'
+        repoUrl: 'github.com?repo=course-code&owner=penguins0141'
         branchOrTagName: 'main'
                 
 #    - id: create-proton-service
