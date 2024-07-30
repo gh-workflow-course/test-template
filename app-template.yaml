@@ -16,8 +16,6 @@ spec:
   parameters:
     - title: Project Details
       required:
-        - title
-        - description
         - owner
         - workflow_id
       properties:
