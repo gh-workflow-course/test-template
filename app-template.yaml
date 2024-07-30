@@ -27,6 +27,32 @@ spec:
           title: Workflow ID (yaml)
           type: string
           description: The name of the workflow yaml file being used  
+        repo-name:
+          title: Repo Name
+          type: string
+          description: Repository Name
+        repo-desc:
+          title: Repo Desc
+          type: string
+          description: Repository Description
+        support-group-email:
+          title: Support Group Email
+          type: string
+          description: Email
+        team-id:
+          title: Team ID
+          type: string
+          description: Team ID
+        private:
+          title: Private Or Public
+          type: boolean
+          description: Private or Public
+        template:
+          title: Template
+          type: string
+          description: Template
+
+
     - title: Repository Details
       required:
         - repoUrl
@@ -73,13 +99,10 @@ spec:
         repoUrl: 'github.com?repo=repository-bootstrap&owner=mutual-of-omaha'
         repo-name: 'test-scaffolder-dispatch1'
         repo-desc: 'testing scaffolder dispatch with bootstrap'
-        support-group-email: 'rob.temple@mutualofomaha.com' 
-        organization: 'mutual-of-omaha'
+        support-group-email: 'ctpsp.support@mutualofomaha.com' 
         private: false
         team-id: 'CTPSP'
-        template: none
-        delete-repo: false
-        vault-override: false
+        template: 'None'
         branchOrTagName: 'main'
                 
 #    - id: create-proton-service
