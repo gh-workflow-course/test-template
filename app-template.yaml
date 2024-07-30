@@ -21,39 +21,14 @@ spec:
         - owner
         - workflow_id
       properties:
-        title:
-          title: Title
-          description: Human-readable name for the new project, with proper capitalization
-          type: string
-        description:
-          title: Project Description
-          type: string
-          ui:options:
-            rows: 3
         owner:
           title: Owner
           description: Github repo owner
           type: string
-        repo_desc:
-          title: repo-desc
-          description: description for repo
-          type: string  
-        repo_name:
-          title: repo-name
-          description: name for new repo
-          type: string  
-        team_id:
-          title: team-id
-          description: team id
-          type: string      
         workflow_id:
           title: Workflow ID (yaml)
           type: string
-          description: The name of the workflow yaml file being used
-        workflow_id2:
-          title: Workflow ID 2 (yaml)
-          type: string
-          description: The name of the workflow yaml file being used
+          description: The name of the workflow yaml file being used  
     - title: Repository Details
       required:
         - repoUrl
@@ -73,8 +48,6 @@ spec:
         url: ./templates
         values:
           workflow_id: ${{ parameters.workflow_id }}
-          title: ${{ parameters.title }}
-          description: ${{ parameters.description }}
           owner: ${{ parameters.owner }}
           repoUrl: ${{ parameters.repoUrl | parseRepoUrl }}
                     
@@ -96,7 +69,7 @@ spec:
       name: Buy more Guitars!
       action: github:actions:dispatch
       input:
-        workflowId:  ${{ parameters.workflow_id2 }}
+        workflowId:  ${{ parameters.workflow_id }}
         owner:  ${{ parameters.owner }}
         repoUrl: 'github.com?repo=course-code&owner=penguins0141'
         branchOrTagName: 'main'
