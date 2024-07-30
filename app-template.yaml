@@ -70,7 +70,7 @@ spec:
       input:
         workflowId:  ${{ parameters.workflow_id }}
         owner:  ${{ parameters.owner }}
-        repoUrl: ${{ parameters.repoUrl | parseRepoUrl }}
+        repoUrl: '${{ parameters.repoUrl | parseRepoUrl }}'
         branchOrTagName: 'main'
                 
 #    - id: create-proton-service
