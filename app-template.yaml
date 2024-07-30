@@ -1,0 +1,131 @@
+# nonk8s
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  namespace: ctp
+  name: GitHubActionsTester
+  title: Dispatch GitHub Actions
+  description: testservicetemplate
+  annotations:
+    backstage.io/techdocs-ref: 'dir:.'
+    
+spec:
+  owner: ctpsp
+  type: service
+
+  parameters:
+    - title: Project Details
+      required:
+        - title
+        - description
+        - owner
+        - workflow_id
+      properties:
+        title:
+          title: Title
+          description: Human-readable name for the new project, with proper capitalization
+          type: string
+        description:
+          title: Project Description
+          type: string
+          ui:options:
+            rows: 3
+        owner:
+          title: Owner
+          description: Github repo owner
+          type: string
+        repo_desc:
+          title: repo-desc
+          description: description for repo
+          type: string  
+        repo_name:
+          title: repo-name
+          description: name for new repo
+          type: string  
+        team_id:
+          title: team-id
+          description: team id
+          type: string      
+        workflow_id:
+          title: Workflow ID (yaml)
+          type: string
+          description: The name of the workflow yaml file being used
+        workflow_id2:
+          title: Workflow ID 2 (yaml)
+          type: string
+          description: The name of the workflow yaml file being used
+    - title: Repository Details
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+  steps:
+    - id: generateCode
+      name: Generate Code
+      action: fetch:template
+      input:
+        url: ./templates
+        values:
+          workflow_id: ${{ parameters.workflow_id }}
+          title: ${{ parameters.title }}
+          description: ${{ parameters.description }}
+          owner: ${{ parameters.owner }}
+          repoUrl: ${{ parameters.repoUrl | parseRepoUrl }}
+                    
+    # - id: github-action
+    #   name: Dispatching First Workflow
+    #   action: github:actions:dispatch
+    #   input:
+    #     workflowId:  ${{ parameters.workflow_id }}
+    #     owner:  ${{ parameters.owner }}
+    #     private: false
+    #     team-id: ${{ parameters.team_id }}
+    #     repo-name: ${{ parameters.repo_name }}
+    #     repo-desc: ${{ parameters.repo_desc }}
+    #     repoUrl: 'github.com?repo=repository-bootstrap&owner=mutual-of-omaha'
+    #     #repoUrl: 'api.github.com/repos/mutual-of-omaha/repository-bootstrap/actions/provision.yml'
+    #     branchOrTagName: 'main'
+        
+    - id: github-action
+      name: Buy more Guitars!
+      action: github:actions:dispatch
+      input:
+        workflowId:  ${{ parameters.workflow_id2 }}
+        owner:  ${{ parameters.owner }}
+        repoUrl: 'api.github.com?repo=course-code&owner=penguins0141'
+        branchOrTagName: 'main'
+                
+#    - id: create-proton-service
+#      name: Create AWS Proton Service
+#      action: aws:proton:create-service
+#      input:
+#        serviceName: ${{ parameters.component_id }}
+#        branchName: main
+#        serviceSpecPath: ./spec.yaml
+#        repository: ${{ "github.com?repo=test115&owner=penguins0141" | parseRepoUrl }}
+#        # Update the following fields to match the resources in your AWS account
+#        region: us-east-1
+#        templateName: load-balanced-fargate-svc
+#        templateMajorVersion: '1'
+#        repositoryConnectionArn: 'arn:aws:codestar-connections:us-east-1:490746600485:connection/e2b929a1-8dbf-4b37-bf9f-2a7fbd6f0bed'
+        
+    # - id: registerInCatalog
+    #   name: Register in Catalog
+    #   action: catalog:register
+    #   input:
+    #     repoContentsUrl: "https://github.com/mutual-of-omaha/ctpsp-test2/blob/main"
+    #     catalogInfoPath: /catalog-info.yaml
+
+  # output:
+  #   links:
+  #     - title: Repository
+  #       url: ${{ steps.publish.output.remoteUrl }}
+  #     - title: Open in catalog
+  #       icon: catalog
+  #       entityRef: ${{ steps.register.output.entityRef }}
